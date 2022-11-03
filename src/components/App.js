@@ -97,20 +97,15 @@ function App() {
 
   //проверка токена
   function checkToken() {
-    const jwt = localStorage.getItem('jwt');
+    const jwt = localStorage.getItem("jwt");
     if (jwt) {
-      getMail(jwt)
-        .then((res) => {
-          if (res) {
-            setUserMail(res.data.email);
-            setIsLoggedIn(true);
-          }
-        })
-        .catch((err => {
-          console.log(err);
-        }))
+      getMail(jwt).then((res) => {
+        if (res) {
+          setUserMail(res.data.email);
+          setIsLoggedIn(true);
+        }
+      });
     }
-    
   }
 
   function handleEditProfileClick() {
@@ -187,9 +182,7 @@ function App() {
       .changeAvatar(link)
       .then((res) => {
         setCurrentUser(res);
-        console.log("ddd");
         closeAllPopups();
-        console.log("ddd");
       })
       .catch((err) => console.log(`Ошибка: ${err}`))
       .finally(() => setIsLoading(false));

@@ -6,7 +6,7 @@ import useValidation from "../hooks/useValidation";
 function EditAvatarPopup(props) {
   const avatarRef = useRef();
 
-  const  {isValid } =
+  const {isValid } =
     useValidation({});
 
   function handleSubmit(e) {
