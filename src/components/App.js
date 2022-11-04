@@ -1,12 +1,5 @@
 import { useState, useEffect } from "react";
-import {
-  Route,
-  Switch,
-  Redirect,
-  Link,
-  NavLink,
-  useHistory,
-} from "react-router-dom";
+import { Route, Switch, Redirect, useHistory } from "react-router-dom";
 import "../index.css";
 import Header from "./Header";
 import Main from "./Main";
@@ -74,7 +67,7 @@ function App() {
         setIsInfoToolPopupOpen("success");
         history.push("/sign-in");
       })
-      .catch((err) => {
+      .catch(() => {
         setIsInfoToolPopupOpen("error");
       });
   }
@@ -86,11 +79,12 @@ function App() {
         if (data.token) {
           localStorage.setItem("jwt", data.token);
           setIsLoggedIn(true);
+          setUserMail(email);
           history.push("/");
         }
       })
-      .catch((err) => {
-        setIsLoggedIn(false);
+      .catch(() => {
+        setIsInfoToolPopupOpen("error");
         history.push("/sign-in");
       });
   }
@@ -99,13 +93,24 @@ function App() {
   function checkToken() {
     const jwt = localStorage.getItem("jwt");
     if (jwt) {
-      getMail(jwt).then((res) => {
-        if (res) {
-          setUserMail(res.data.email);
-          setIsLoggedIn(true);
-        }
-      });
+      getMail(jwt)
+        .then((res) => {
+          if (res) {
+            setUserMail(res.data.email);
+            setIsLoggedIn(true);
+          }
+        })
+        .catch(() => {
+          history.push("/sign-in");
+        });
     }
+  }
+
+  //выход
+  function logout() {
+    setIsLoggedIn(false);
+    console.log(isLoggedIn);
+    localStorage.removeItem("jwt");
   }
 
   function handleEditProfileClick() {
@@ -203,7 +208,7 @@ function App() {
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
-        <Header userMail={userMail} />
+        <Header userMail={userMail} logout={logout} />
         <Switch>
           <ProtectedRoute
             exact
@@ -264,7 +269,12 @@ function App() {
           isLoading={isLoading}
         />
 
-        <InfoTooltip isOpened={isInfoToolPopupOpen} onClose={closeAllPopups} />
+        <InfoTooltip
+          isOpened={isInfoToolPopupOpen}
+          onClose={closeAllPopups}
+          textOk="Вы успешно зарегистрировались!"
+          textTrouble="Что-то пошло не так! Попробуйте ещё раз."
+        />
 
         <Footer />
       </div>

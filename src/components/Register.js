@@ -57,11 +57,11 @@ function Register(props) {
       >
         {errors.password}
       </span>
-      <button className="form__button-submit" type="submit">
+      <button className="form__button-submit" type="submit" onClick={props.handleRegister}>
         Зарегистрироваться
       </button>
       <p className="form__redirect">
-        Уже зарегистрированы?
+        Уже зарегистрированы? 
         <Route path="/sign-up">
           <Link to="/sign-in" className="form__redirect-link">
             Войти

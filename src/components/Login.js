@@ -39,6 +39,7 @@ function Login(props) {
       <input
         className="form__input form__input_type_password"
         id="password"
+        type="password"
         name="password"
         placeholder="Пароль"
         minLength={6}
@@ -54,7 +55,7 @@ function Login(props) {
       >
         {errors.password}
       </span>
-      <button className="form__button-submit" type="submit">
+      <button className="form__button-submit" type="submit" onClick={props.handleLogin}>
         Войти
       </button>
     </form>
