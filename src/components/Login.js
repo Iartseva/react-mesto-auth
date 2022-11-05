@@ -55,7 +55,7 @@ function Login(props) {
       >
         {errors.password}
       </span>
-      <button className="form__button-submit" type="submit" onClick={props.handleLogin}>
+      <button className="form__button-submit" type="submit" >
         Войти
       </button>
     </form>
