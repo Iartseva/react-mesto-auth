@@ -42,7 +42,7 @@ function App() {
         })
         .catch((err) => console.log(`Ошибка: ${err}`));
     }
-  }, [isLoggedIn, history]);
+  }, [isLoggedIn]);
 
   useEffect(() => {
     if (isLoggedIn) {
@@ -54,7 +54,7 @@ function App() {
         })
         .catch((err) => console.log(`Ошибка: ${err}`));
     }
-  }, [isLoggedIn, history]);
+  }, [isLoggedIn]);
 
   useEffect(() => {
     checkToken();
@@ -109,6 +109,7 @@ function App() {
   //выход
   function logout() {
     setIsLoggedIn(false);
+    console.log(isLoggedIn);
     localStorage.removeItem("jwt");
   }
 
@@ -241,23 +242,20 @@ function App() {
           onUpdateUser={handleUpdateUser}
           isLoading={isLoading}
         />
-        <EditAvatarPopup
-          isOpened={isEditAvatarPopupOpened}
-          onClose={closeAllPopups}
-          onUpdateAvatar={handleUpdateAvatar}
-          isLoading={isLoading}
-        />
+
         <AddPlacePopup
           isOpened={isAddPopupOpened}
           onClose={closeAllPopups}
           onAddPlace={handleAddPlaceSubmit}
           isLoading={isLoading}
         />
+
         <ImagePopup
           isOpened={isImagePopupOpened}
           card={selectedCard}
           onClose={closeAllPopups}
         />
+
         <DeletePopup
           isOpened={isCardDeletePopupOpened}
           onClose={closeAllPopups}
@@ -271,6 +269,13 @@ function App() {
           onClose={closeAllPopups}
           textOk="Вы успешно зарегистрировались!"
           textTrouble="Что-то пошло не так! Попробуйте ещё раз."
+        />
+
+        <EditAvatarPopup
+          isOpened={isEditAvatarPopupOpened}
+          onClose={closeAllPopups}
+          onUpdateAvatar={handleUpdateAvatar}
+          isLoading={isLoading}
         />
       </div>
     </CurrentUserContext.Provider>

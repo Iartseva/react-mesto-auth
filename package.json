@@ -46,5 +46,6 @@
     "postcss-dir-pseudo-class": "^6.0.5",
     "postcss-loader": "^7.0.1",
     "postcss-pseudo-class-any-link": "^7.1.6"
-  }
+  },
+  "homepage": "https://iartseva.github.io/react-mesto-auth/"
 }

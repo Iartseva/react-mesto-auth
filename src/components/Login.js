@@ -2,7 +2,7 @@ import React from "react";
 import useValidation from "../hooks/useValidation";
 
 function Login(props) {
-  const { values, handleChange, errors, isValid, resetForm } =
+  const { values, handleChange, errors, isValid, setValues, resetForm } =
     useValidation({
       email: "",
       password: "",
@@ -25,6 +25,7 @@ function Login(props) {
         name="email"
         placeholder="Email"
         onChange={handleChange}
+        autoComplete="username"
         required
         value={values.email || ""}
         minLength={4}
@@ -45,6 +46,7 @@ function Login(props) {
         minLength={6}
         maxLength={10}
         onChange={handleChange}
+        autoComplete="current-password"
         required
         value={values.password || ""}
       />
@@ -55,7 +57,7 @@ function Login(props) {
       >
         {errors.password}
       </span>
-      <button className="form__button-submit" type="submit" >
+      <button className="form__button-submit" type="submit">
         Войти
       </button>
     </form>

@@ -27,6 +27,7 @@ function Register(props) {
         type="email"
         placeholder="Email"
         minLength={4}
+        autoComplete="username"
         required
         onChange={handleChange}
         value={values.email || ""}
@@ -46,6 +47,7 @@ function Register(props) {
         minLength={6}
         maxLength={10}
         placeholder="Пароль"
+        autoComplete="current-password"
         required
         onChange={handleChange}
         value={values.password || ""}
@@ -57,18 +59,16 @@ function Register(props) {
       >
         {errors.password}
       </span>
-      <button
-        className="form__button-submit"
-        type="submit"
-        onClick={props.handleRegister}
-      >
+      <button className="form__button-submit" type="submit" onClick={props.handleRegister}>
         Зарегистрироваться
       </button>
       <p className="form__redirect">
-        Уже зарегистрированы?
-        <Link to="/sign-in" className="form__redirect-link">
-          Войти
-        </Link>
+        Уже зарегистрированы? 
+        <Route path="/sign-up">
+          <Link to="/sign-in" className="form__redirect-link">
+            Войти
+          </Link>
+        </Route>
       </p>
     </form>
   );
