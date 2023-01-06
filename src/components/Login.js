@@ -2,7 +2,7 @@ import React from "react";
 import useValidation from "../hooks/useValidation";
 
 function Login(props) {
-  const { values, handleChange, errors, isValid, setValues, resetForm } =
+  const { values, handleChange, errors, isValid, resetForm } =
     useValidation({
       email: "",
       password: "",
